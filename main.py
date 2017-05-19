@@ -1,15 +1,13 @@
-# coding = utf8
-import codecs
-import sys
+# -*- coding: UTF-8 -*-
 if __name__ == '__main__':
-    input_fp = codecs.open('2015taiwan.txt', 'r')
-    output_fp = codecs.open('output.txt', 'w')
+    input_fp = open('2015taiwan.txt', 'r')
+    output_fp = open('output.txt', 'w')
     for line in input_fp:
         line_list = line.split(',')
         if line_list[2] != "PM2.5":
             continue
         else:
-            line_list[1] = line_list[1].encode('big5')
+			location = line_list[1].decode('big5').encode('utf-8')
             output_fp.write(str(line_list).decode('big5'))
             output_fp.write('\n')
-            print line_list
+            print location

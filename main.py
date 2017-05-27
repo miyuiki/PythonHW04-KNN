@@ -7,6 +7,7 @@ from sklearn.preprocessing import Imputer
 
 if __name__ == '__main__':
     city_list = []
+    city_dic = {}
     input_fp = open('2015taiwan.txt', 'r')
     buffer_fp = open('buffer.txt', 'w')
     fp = open('buffer.txt', 'r')
@@ -32,12 +33,23 @@ if __name__ == '__main__':
     data.pop('end')
     g = data.groupby(['location'])
     pm_mean = g.mean()
-    city_cnt = len(g)
-    #city_list = pm_mean['location'].tolist()
-    p = []
+    city_list = data.sort_values(by = "location")['location'].drop_duplicates().tolist()
+    p = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     for x in xrange(0,24):
-        p.append(pm_mean['{}'.format(x)].map('{:,.2f}'.format).tolist())
-    print p[0]
+        p[x] = pm_mean['{}'.format(x)].map('{:,.2f}'.format).tolist()
+    p = map(list, zip(*p))
+    for x in xrange(0,len(city_list)):
+        city_dic['{}'.format(city_list[x])] = x
+    for line in fp:
+        line_list = line.split(' ')
+        for i in xrange(0, len(line_list)):
+            if line_list[i] == 'nan':
+                line_list[i] = p[city_dic['{}'.format(line_list[1])]][i-3]
+            output.write(str(line_list[i]) + ' ')
+        output.write('\n')
+
+
+
 
 
     

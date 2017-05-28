@@ -2,8 +2,6 @@
 
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing
-from sklearn.preprocessing import Imputer
 
 if __name__ == '__main__':
     city_list = []
@@ -45,8 +43,12 @@ if __name__ == '__main__':
         for i in xrange(0, len(line_list)):
             if line_list[i] == 'nan':
                 line_list[i] = p[city_dic['{}'.format(line_list[1])]][i-3]
-            output.write(str(line_list[i]) + ' ')
+            if i != len(line_list)-2:
+                output.write(str(line_list[i]) + " ")
+            else:
+                output.write(str(line_list[i]))
         output.write('\n')
+
 
 
 

@@ -43,7 +43,7 @@ if __name__ == '__main__':
     city_dic1.pop('龍潭')
     city_dic2.pop('龍潭')
     city_tuple1 = sorted(city_dic1.iteritems(), key=lambda d: d[1])
-    city_tuple2 = sorted(city_dic2.iteritems(), key=lambda d: d[1])
+    city_tuple2 = sorted(city_dic2.iteritems(), key=lambda d: d[1], reverse = True)
     print "--------find by distant---------"
     for i in iter(city_tuple1):
         if cnt1 == 5:

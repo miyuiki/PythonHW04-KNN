@@ -10,7 +10,7 @@
 分別是preprocessing.py， knn_1.py，knn_2.py
 preprocessing.py 對輸入檔進行處理，先將缺失值與錯誤值替代成np.NaN
 並輸出到buffer.txt，在讀入buffer.txt將NaN替代為平均值
-最後輸出==output.txt==
+最後輸出output.txt
 
 ![](https://github.com/miyuiki/PythonHW04-KNN/blob/master/capture/capture%2005292103.jpg?raw=true)
 

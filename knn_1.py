@@ -3,6 +3,25 @@
 import numpy as np
 import pandas as pd
 
+def distance(vector1,vector2):  
+    d = 0;  
+    for a,b in zip(vector1,vector2):  
+        d += (a - b) ** 2;  
+    return d ** 0.5;
+
+def cos(vector1,vector2):  
+    dot_product = 0.0;  
+    normA = 0.0;  
+    normB = 0.0;  
+    for a,b in zip(vector1,vector2):  
+        dot_product += a*b  
+        normA += a**2  
+        normB += b**2  
+    if normA == 0.0 or normB == 0.0:  
+        return None  
+    else:  
+        return dot_product / ((normA * normB) ** 0.5)
+
 if __name__ == '__main__':
     cnt1 = 0
     cnt2 = 0
@@ -21,21 +40,9 @@ if __name__ == '__main__':
         p[x] = data['{}'.format(x)].tolist()
     p = map(list, zip(*p))
     for i in xrange(1,len(p)):
-        d = 0
-        s = 0
-        s1 = 0
-        s2 = 0
-        s3 = 0
-        for j in xrange(0,len(p[i])):
-            d += (p[0][j]-p[i][j])**2
-            s1 += p[0][j]*p[i][j]
-            s2 += p[0][j]**2
-            s2 = np.sqrt(s2)
-            s3 += p[i][j]**2
-            s3 = np.sqrt(s3)
-            s = s1/s2*s3
-        distant_list.append(np.sqrt(d))
-        similarity_list.append(s)
+        distant_list.append(distance(p[0], p[i])) 
+        similarity_list.append(cos(p[0], p[i]))
+        
     for x in xrange(1,len(city_list)):
         city_dic1['{}'.format(city_list[x])] = distant_list[x-1]
     for x in xrange(1,len(city_list)):
